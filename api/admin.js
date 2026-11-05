@@ -13,8 +13,9 @@ export default async function handler(req, res) {
       return res.json({ ok: true });
     }
     if (b.action === 'upload') {
-      const buf = Buffer.from(String(b.data).split(',')[1], 'base64');
-      const f = await put('img/product.jpg', buf, { access: 'public', contentType: 'image/jpeg', addRandomSuffix: true });
+      const m = /^data:(image\/(?:png|jpeg));base64,(.+)$/.exec(String(b.data));
+      if (!m) return res.status(400).json({ error: 'Unsupported image' });
+      const f = await put('img/upload.' + (m[1] === 'image/png' ? 'png' : 'jpg'), Buffer.from(m[2], 'base64'), { access: 'public', contentType: m[1], addRandomSuffix: true });
       return res.json({ url: f.url });
     }
     res.status(400).json({ error: 'Bad request' });
