@@ -166,7 +166,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,a');if(!t
  else if(g('buy')){buy=g('buy');checkout()}else if(g('c')){cat=g('c');render()}
  else if(t.id=='openCart'){buy=null;open('cart')}else if(t.id=='toCheckout'){buy=null;checkout()}
  else if(t.hasAttribute('data-close'))closeAll()});
-$('#ov').onclick=closeAll;document.onkeydown=e=>e.key=='Escape'&&closeAll();
+$('#ov').onclick=closeAll;document.onkeydown=e=>{if(e.key=='Escape')closeAll()};
 $('#form').onsubmit=e=>{e.preventDefault();const L=lines(),t=L.reduce((a,r)=>a+r.p.price*r.q,0),id='TV-'+Date.now().toString(36).toUpperCase().slice(-6);
  const m=[`*New order ${id} - ${S.name||'Taste Veelicious'}*`,'',`Name: ${$('#n').value}`,`Phone: ${$('#p').value}`,!!$('#e').value&&`Email: ${$('#e').value}`,`Delivery address: ${$('#a').value}`,!!$('#t').value&&`Notes: ${$('#t').value}`,'','*Items*',...L.map((r,i)=>`${i+1}. ${r.p.name} x${r.q} - ${money(r.p.price*r.q)}`),'',`*Total: ${money(t)}* (delivery fee to be confirmed)`].filter(x=>x!==false).join('\n');
  const u='https://wa.me/'+wa()+'?text='+encodeURIComponent(m);if(!buy){cart=[];save();drawCart()}buy=null;e.target.reset();closeAll();toast('Opening WhatsApp to send your order');

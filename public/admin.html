@@ -50,7 +50,7 @@ async function enter(){await api({action:'login'});sessionStorage.setItem('tvpw'
  const d=await (await fetch('/api/data')).json();S={name:'Taste Veelicious',whatsapp:'07066506886',email:'Ijandipeimoleayo@gmail.com',...(d.settings||{})};P=d.products||[];
  $('#sn').value=S.name;$('#sw').value=S.whatsapp;$('#se').value=S.email;draw()}
 $('#go').onclick=async()=>{pw=$('#pw').value;try{await enter()}catch(e){$('#err').textContent=e.message}};
-$('#pw').onkeydown=e=>e.key=='Enter'&&$('#go').click();
+$('#pw').onkeydown=e=>{if(e.key=='Enter')$('#go').click()};
 if(pw)enter().catch(()=>{pw=''});
 function draw(){$('#cats').innerHTML=[...new Set(P.map(p=>p.category))].map(c=>`<option value="${esc(c)}">`).join('');
  $('#list').innerHTML=P.length?P.map(p=>`<div class="p"><div class="t">${p.image?`<img src="${esc(p.image)}" alt="">`:'<i data-lucide="chef-hat"></i>'}</div><div><b>${esc(p.name)}</b><div class="mu">₦${Number(p.price).toLocaleString()} | ${esc(p.category||'No category')} | ${p.available===false?'Sold out':'In stock'}</div></div><div class="act"><button class="btn o" data-e="${p.id}" aria-label="Edit"><i data-lucide="pencil"></i></button><button class="btn d" data-x="${p.id}" aria-label="Delete"><i data-lucide="trash-2"></i></button></div></div>`).join(''):'<p class="mu">No products yet. Add your first one above.</p>';lucide.createIcons()}
