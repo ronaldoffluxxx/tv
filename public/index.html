@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taste Veelicious | Cooking at Vee's</title>
+<meta name="description" content="Freshly cooked meals, small chops and drinks from Vee's kitchen. Order on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+:root{--bg:#050505;--card:#121110;--line:#2a2623;--tx:#f5efe8;--mu:#a39b93;--or:#f7941d;--am:#ffc02e;--r:18px}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.6 Figtree,sans-serif;overflow-x:hidden}
+h1,h2,h3,.logo{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--am);outline-offset:2px}
+i[data-lucide],svg.lucide{width:1.15em;height:1.15em;vertical-align:-.2em}
+.wrap{max-width:1180px;margin:auto;padding:0 20px}
+header{position:fixed;inset:0 0 auto;z-index:20;background:rgba(5,5,5,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:800;font-size:1.3rem;display:flex;gap:8px;align-items:center}.logo svg{color:var(--or)}
+nav{display:flex;gap:26px;align-items:center}nav a{color:var(--mu)}nav a:hover{color:var(--tx)}
+.btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;border:0;cursor:pointer;border-radius:99px;padding:12px 22px;font-weight:600;background:linear-gradient(135deg,var(--or),var(--am));color:#1a0f00;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(247,148,29,.35)}
+.btn.ghost{background:none;color:var(--tx);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--or);box-shadow:none}
+.cartbtn{position:relative;padding:10px 14px}.badge{position:absolute;top:-6px;right:-6px;background:#fff;color:#000;border-radius:99px;font-size:.72rem;min-width:20px;height:20px;display:grid;place-items:center;font-weight:700}
+.badge.pop{animation:pop .4s}@keyframes pop{50%{transform:scale(1.5)}}
+.menu{display:none}
+.hero{min-height:100svh;display:grid;align-items:center;padding:110px 0 60px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:70vw;height:70vw;max-width:800px;max-height:800px;right:-15vw;top:8%;background:radial-gradient(circle,rgba(247,148,29,.28),transparent 65%);animation:glow 5s ease-in-out infinite alternate}
+@keyframes glow{to{opacity:.55;transform:scale(1.1)}}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;position:relative}
+.hero h1{font-size:clamp(2.8rem,8vw,6.2rem);font-weight:800;letter-spacing:-.03em}
+.hero h1 span{display:block;background:linear-gradient(90deg,var(--or),var(--am),var(--or));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 4s linear infinite}
+@keyframes sheen{to{background-position:200%}}
+.hero p{color:var(--mu);max-width:46ch;margin:22px 0 30px;font-size:1.1rem}.cta{display:flex;gap:12px;flex-wrap:wrap}
+.pan{position:relative;aspect-ratio:1;max-width:460px;margin:auto;width:100%}
+.pan svg{width:100%;height:100%;overflow:visible}
+.flame{transform-origin:50% 100%;animation:flick 1.3s ease-in-out infinite alternate}.flame.b{animation-duration:.9s;animation-delay:-.4s}
+@keyframes flick{0%{transform:scale(1,1) skewX(0)}50%{transform:scale(.96,1.07) skewX(-2deg)}100%{transform:scale(1.04,.95) skewX(2deg)}}
+.panbody{animation:toss 3.2s ease-in-out infinite;transform-origin:30% 70%}@keyframes toss{50%{transform:rotate(-4deg) translateY(-6px)}}
+.ember{position:absolute;bottom:50%;width:7px;height:7px;border-radius:50%;background:var(--am);box-shadow:0 0 12px var(--or);opacity:0;animation:rise 3s linear infinite}
+@keyframes rise{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),-190px)}}
+.strip{border-block:1px solid var(--line);overflow:hidden;background:#0b0a09}
+.strip div{display:flex;gap:48px;width:max-content;padding:16px 0;animation:mq 28s linear infinite;color:var(--mu);font-weight:500}
+.strip span{display:flex;gap:10px;align-items:center}.strip svg{color:var(--or)}@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:90px 0}h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.sub{color:var(--mu);margin-bottom:34px;max-width:52ch}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}.tab{border:1px solid var(--line);background:none;padding:8px 18px;border-radius:99px;cursor:pointer;color:var(--mu)}.tab.on{background:var(--or);border-color:var(--or);color:#1a0f00;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--or)}
+.img{aspect-ratio:4/3;background:linear-gradient(135deg,#1c1612,#2b1d0d);display:grid;place-items:center;color:var(--or);overflow:hidden}
+.img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.card:hover .img img{transform:scale(1.07)}.img svg{width:44px;height:44px}
+.cb{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}.cb h3{font-size:1.2rem}.cb p{color:var(--mu);font-size:.92rem;flex:1}
+.pr{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.3rem;color:var(--am)}
+.row{display:flex;gap:8px}.row .btn{flex:1;padding:10px 12px;font-size:.92rem}
+.soldout{opacity:.5;pointer-events:none}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.step{border-left:2px solid var(--or);padding:4px 0 4px 18px}.step svg{color:var(--or);width:28px;height:28px;margin-bottom:10px}.step p{color:var(--mu)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}.reveal.in{opacity:1;transform:none}
+.band{background:linear-gradient(135deg,#1c1105,#0b0907);border:1px solid var(--line);border-radius:28px;padding:clamp(28px,6vw,64px);display:flex;gap:24px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mu)}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}footer a{display:inline-flex;gap:8px;align-items:center;margin-right:18px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:40;opacity:0;pointer-events:none;transition:.3s}.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#0c0b0a;border-left:1px solid var(--line);z-index:50;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.on{transform:none}.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.ib{background:none;border:1px solid var(--line);border-radius:50%;width:36px;height:36px;display:grid;place-items:center;cursor:pointer}.ib:hover{border-color:var(--or)}
+.db{flex:1;overflow:auto;padding:16px 20px}.df{padding:18px 20px;border-top:1px solid var(--line)}
+.li{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.li .img{border-radius:12px;aspect-ratio:1}.li .img svg{width:22px;height:22px}.qty{display:flex;gap:8px;align-items:center;margin-top:4px}.qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;display:grid;place-items:center}
+.tot{display:flex;justify-content:space-between;font-weight:600;font-size:1.15rem;margin-bottom:14px}
+.empty{text-align:center;color:var(--mu);padding:60px 10px}.empty svg{width:42px;height:42px;color:var(--or);margin-bottom:10px}
+label{display:block;font-size:.9rem;color:var(--mu);margin:12px 0 4px}
+input,textarea{width:100%;background:#151311;border:1px solid var(--line);border-radius:12px;padding:12px 14px}input:focus,textarea:focus{border-color:var(--or);outline:0}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);background:#fff;color:#000;padding:12px 20px;border-radius:99px;z-index:70;transition:.4s;display:flex;gap:8px;align-items:center;font-weight:600}.toast.on{transform:translate(-50%,0)}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.pan{max-width:300px;order:-1}.hero{padding-top:90px}nav a{display:none}section{padding:64px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+<header><div class="wrap"><a href="#top" class="logo"><i data-lucide="flame"></i>Taste Veelicious</a>
+<nav><a href="#menu">Menu</a><a href="#how">How it works</a><a href="#contact">Contact</a>
+<button class="btn cartbtn" id="openCart" aria-label="Open cart"><i data-lucide="shopping-bag"></i><span class="badge" id="count">0</span></button></nav></div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div><h1>Cooking at<span>Vee's kitchen</span></h1>
+<p>Smoky, spicy, made-to-order food for your table, your party and your late nights. Pick what you want, send the order straight to us on WhatsApp.</p>
+<div class="cta"><a href="#menu" class="btn"><i data-lucide="utensils"></i>Order now</a><a href="#how" class="btn ghost"><i data-lucide="route"></i>How it works</a></div></div>
+<div class="pan" aria-hidden="true">
+<span class="ember" style="left:42%;--x:-30px"></span><span class="ember" style="left:52%;--x:20px;animation-delay:-1s"></span><span class="ember" style="left:60%;--x:40px;animation-delay:-2s"></span><span class="ember" style="left:36%;--x:-50px;animation-delay:-1.6s"></span>
+<svg viewBox="0 0 400 400"><defs><linearGradient id="f" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f7941d"/><stop offset="1" stop-color="#ffd24a"/></linearGradient></defs>
+<g class="panbody"><ellipse cx="170" cy="272" rx="125" ry="26" fill="#141210" stroke="#3a332d" stroke-width="3"/><path d="M45 272c10 50 70 70 125 70s110-20 125-70" fill="#0f0d0c" stroke="#3a332d" stroke-width="3"/><path d="M290 280c30-8 60-34 85-62 12-12 22-12 22-2s-12 20-24 32c-30 30-60 44-90 40z" fill="#0f0d0c" stroke="#3a332d" stroke-width="3"/>
+<g class="flame"><path d="M170 262c-70-10-90-70-50-120 6 20 16 28 24 30-6-40 10-76 40-108-2 40 22 56 34 84 4-14 2-26-4-40 30 30 50 90 6 140-12 8-32 12-50 14z" fill="url(#f)"/></g>
+<g class="flame b"><path d="M170 262c-36-6-48-40-24-70 6 12 12 14 18 14-2-22 6-40 20-54 0 20 12 30 18 44 18 28 8 56-32 66z" fill="#ffe08a" opacity=".85"/></g></g></svg></div>
+</div></div>
+<div class="strip"><div id="mq"></div></div>
+
+<section id="menu"><div class="wrap">
+<h2 class="reveal">What's cooking</h2><p class="sub reveal">Add to your bag or buy a dish right away. We confirm the delivery fee on WhatsApp.</p>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div></div></section>
+
+<section id="how"><div class="wrap"><h2 class="reveal">Order in three steps</h2><p class="sub reveal">No accounts, no waiting on hold.</p>
+<div class="steps">
+<div class="step reveal"><i data-lucide="mouse-pointer-click"></i><h3>Pick your food</h3><p>Browse the menu and fill your bag.</p></div>
+<div class="step reveal"><i data-lucide="map-pin"></i><h3>Tell us where</h3><p>Enter your name, phone and delivery address.</p></div>
+<div class="step reveal"><i data-lucide="message-circle"></i><h3>We confirm on WhatsApp</h3><p>Your order lands in our chat, we confirm and cook.</p></div></div></div></section>
+
+<section id="contact"><div class="wrap"><div class="band reveal"><div><h2>Hungry already?</h2><p class="sub" style="margin:0">Parties, office lunch or a quiet dinner. Message Vee directly.</p></div>
+<a class="btn" id="waLink" href="#" target="_blank" rel="noopener"><i data-lucide="message-circle"></i>Chat on WhatsApp</a></div></div></section>
+</main>
+
+<footer><div class="wrap"><div class="logo"><i data-lucide="flame"></i>Taste Veelicious</div>
+<div><a id="telLink" href="#"><i data-lucide="phone"></i><span id="telTx"></span></a><a id="mailLink" href="#"><i data-lucide="mail"></i><span id="mailTx"></span></a></div></div></footer>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="cart" aria-label="Cart"><div class="dh"><h3>Your bag</h3><button class="ib" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+<div class="db" id="items"></div><div class="df" id="cf"><div class="tot"><span>Total</span><span id="total"></span></div><button class="btn" style="width:100%" id="toCheckout"><i data-lucide="arrow-right"></i>Checkout</button></div></aside>
+
+<aside class="drawer" id="co" aria-label="Checkout"><div class="dh"><h3>Delivery details</h3><button class="ib" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+<form id="form" style="display:flex;flex-direction:column;flex:1;min-height:0"><div class="db">
+<div id="sum" style="color:var(--mu);font-size:.92rem"></div>
+<label for="n">Full name</label><input id="n" required autocomplete="name">
+<label for="p">Phone number (WhatsApp preferred)</label><input id="p" type="tel" required autocomplete="tel">
+<label for="e">Email (optional)</label><input id="e" type="email" autocomplete="email">
+<label for="a">Delivery address</label><textarea id="a" rows="3" required autocomplete="street-address"></textarea>
+<label for="t">Notes (optional)</label><textarea id="t" rows="2" placeholder="Spice level, delivery time, landmark"></textarea></div>
+<div class="df"><div class="tot"><span>Total</span><span id="ctotal"></span></div><button class="btn" style="width:100%" type="submit"><i data-lucide="send"></i>Send order on WhatsApp</button></div></form></aside>
+<div class="toast" id="toast"><i data-lucide="circle-check"></i><span></span></div>
+
+<script>
+const D={settings:{name:'Taste Veelicious',whatsapp:'07066506886',email:'Ijandipeimoleayo@gmail.com'},products:[
+{id:'1',name:'Party Jollof Tray',price:25000,category:'Mains',description:'Smoky party jollof, serves 8 to 10.',available:true},
+{id:'2',name:'Asun Bowl',price:6500,category:'Mains',description:'Peppered goat meat, grilled then tossed in hot sauce.',available:true},
+{id:'3',name:'Chicken Peppersoup',price:5500,category:'Mains',description:'Fragrant, clear and properly hot.',available:true},
+{id:'4',name:'Small Chops Box',price:12000,category:'Small chops',description:'Samosa, spring rolls, puff puff and chicken wings.',available:true},
+{id:'5',name:'Chin Chin Jar',price:3500,category:'Small chops',description:'Crunchy, lightly sweet, made fresh.',available:true},
+{id:'6',name:'Zobo Drink 1L',price:2500,category:'Drinks',description:'Hibiscus with ginger and pineapple.',available:true}]};
+let S=D.settings,P=D.products,cart=JSON.parse(localStorage.getItem('tvcart')||'[]'),cat='All',buy=null;
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>'₦'+Number(n).toLocaleString('en-NG');
+const wa=()=>{let d=String(S.whatsapp||'').replace(/\D/g,'');if(d.startsWith('0'))d='234'+d.slice(1);return d};
+const ic=()=>lucide.createIcons();
+const img=p=>p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">`:'<i data-lucide="chef-hat"></i>';
+function toast(m){const t=$('#toast');t.querySelector('span').textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
+function site(){const w=wa();$('#waLink').href='https://wa.me/'+w;$('#telLink').href='tel:+'+w;$('#telTx').textContent=S.whatsapp;$('#mailLink').href='mailto:'+S.email;$('#mailTx').textContent=S.email;
+ const m=['Made to order','Party trays','Small chops','Fresh drinks','Delivered to your door','Order on WhatsApp'].map(x=>`<span><i data-lucide="flame"></i>${x}</span>`).join('');$('#mq').innerHTML=m+m}
+function render(){const cats=['All',...new Set(P.map(p=>p.category).filter(Boolean))];
+ $('#tabs').innerHTML=cats.map(c=>`<button class="tab ${c==cat?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+ const L=P.filter(p=>cat=='All'||p.category==cat);
+ $('#grid').innerHTML=L.length?L.map(p=>`<article class="card reveal ${p.available===false?'soldout':''}"><div class="img">${img(p)}</div><div class="cb"><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="pr">${money(p.price)}</div>
+ <div class="row"><button class="btn ghost" data-add="${p.id}"><i data-lucide="plus"></i>Add</button><button class="btn" data-buy="${p.id}"><i data-lucide="zap"></i>Buy now</button></div></div></article>`).join(''):'<p class="sub">Nothing here yet.</p>';
+ ic();io()}
+function io(){const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll('.reveal:not(.in)').forEach(e=>o.observe(e))}
+const save=()=>localStorage.setItem('tvcart',JSON.stringify(cart));
+function drawCart(){const n=cart.reduce((a,c)=>a+c.q,0),b=$('#count');b.textContent=n;b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');
+ const rows=cart.map(c=>{const p=P.find(x=>x.id==c.id);return p&&{p,q:c.q}}).filter(Boolean);
+ $('#items').innerHTML=rows.length?rows.map(({p,q})=>`<div class="li"><div class="img">${img(p)}</div><div><b>${esc(p.name)}</b><div style="color:var(--mu)">${money(p.price)}</div><div class="qty"><button data-dec="${p.id}" aria-label="Less"><i data-lucide="minus"></i></button>${q}<button data-add="${p.id}" aria-label="More"><i data-lucide="plus"></i></button></div></div><button class="ib" data-rm="${p.id}" aria-label="Remove"><i data-lucide="trash-2"></i></button></div>`).join(''):'<div class="empty"><i data-lucide="shopping-bag"></i><p>Your bag is empty. Add something tasty.</p></div>';
+ $('#cf').style.display=rows.length?'':'none';$('#total').textContent=money(rows.reduce((a,r)=>a+r.p.price*r.q,0));ic()}
+function add(id,d=1){const c=cart.find(x=>x.id==id);if(c){c.q+=d;if(c.q<1)cart=cart.filter(x=>x!=c)}else if(d>0)cart.push({id,q:1});save();drawCart()}
+function open(id){$('#ov').classList.add('on');$('#'+id).classList.add('on')}
+function closeAll(){document.querySelectorAll('.drawer,.ov').forEach(e=>e.classList.remove('on'))}
+function lines(){return buy?[{p:P.find(x=>x.id==buy),q:1}]:cart.map(c=>({p:P.find(x=>x.id==c.id),q:c.q})).filter(r=>r.p)}
+function checkout(){const L=lines();if(!L.length)return;const t=L.reduce((a,r)=>a+r.p.price*r.q,0);
+ $('#sum').innerHTML=L.map(r=>`${r.q} x ${esc(r.p.name)}`).join('<br>');$('#ctotal').textContent=money(t);closeAll();open('co')}
+document.addEventListener('click',e=>{const t=e.target.closest('button,a');if(!t)return;const g=a=>t.dataset[a];
+ if(g('add')){add(g('add'));if(t.closest('.card'))toast('Added to your bag')}
+ else if(g('dec'))add(g('dec'),-1);else if(g('rm')){cart=cart.filter(c=>c.id!=g('rm'));save();drawCart()}
+ else if(g('buy')){buy=g('buy');checkout()}else if(g('c')){cat=g('c');render()}
+ else if(t.id=='openCart'){buy=null;open('cart')}else if(t.id=='toCheckout'){buy=null;checkout()}
+ else if(t.hasAttribute('data-close'))closeAll()});
+$('#ov').onclick=closeAll;document.onkeydown=e=>e.key=='Escape'&&closeAll();
+$('#form').onsubmit=e=>{e.preventDefault();const L=lines(),t=L.reduce((a,r)=>a+r.p.price*r.q,0),id='TV-'+Date.now().toString(36).toUpperCase().slice(-6);
+ const m=[`*New order ${id} - ${S.name||'Taste Veelicious'}*`,'',`Name: ${$('#n').value}`,`Phone: ${$('#p').value}`,!!$('#e').value&&`Email: ${$('#e').value}`,`Delivery address: ${$('#a').value}`,!!$('#t').value&&`Notes: ${$('#t').value}`,'','*Items*',...L.map((r,i)=>`${i+1}. ${r.p.name} x${r.q} - ${money(r.p.price*r.q)}`),'',`*Total: ${money(t)}* (delivery fee to be confirmed)`].filter(x=>x!==false).join('\n');
+ const u='https://wa.me/'+wa()+'?text='+encodeURIComponent(m);if(!buy){cart=[];save();drawCart()}buy=null;e.target.reset();closeAll();toast('Opening WhatsApp to send your order');
+ if(!window.open(u,'_blank'))location.href=u};
+fetch('/api/data').then(r=>r.json()).then(d=>{if(d.settings)S={...S,...d.settings};if(d.products)P=d.products}).catch(()=>{}).finally(()=>{site();render();drawCart()});
+site();render();drawCart();
+</script></body></html>
