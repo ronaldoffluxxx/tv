@@ -17,6 +17,7 @@ input:focus,textarea:focus{border-color:var(--or);outline:0}
 .btn.o{background:none;color:var(--tx);border:1px solid var(--line)}.btn.d{background:none;color:#ff7b6b;border:1px solid #4a2420}
 .p{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
 .p .t{width:64px;height:64px;border-radius:12px;background:#1c1612;display:grid;place-items:center;color:var(--or);overflow:hidden}.p .t img{width:100%;height:100%;object-fit:cover}
+.t{width:64px;height:64px;border-radius:12px;background:#1c1612;display:grid;place-items:center;color:var(--or);overflow:hidden}.t img{width:100%;height:100%;object-fit:contain}.chip{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:99px;padding:6px 8px 6px 14px}.chip button{background:none;border:0;color:var(--mu);cursor:pointer;display:grid}
 .mu{color:var(--mu);font-size:.9rem}.act{display:flex;gap:8px;flex-wrap:wrap}
 #msg{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:11px 20px;border-radius:99px;font-weight:600;display:none;z-index:9}
 #login{max-width:380px;margin:12vh auto}.err{color:#ff7b6b;margin-top:10px;min-height:1.4em}
@@ -29,11 +30,19 @@ input:focus,textarea:focus{border-color:var(--or);outline:0}
 <div class="top"><h1>Store manager</h1><div class="act"><a class="btn o" href="/" target="_blank"><i data-lucide="external-link"></i>View store</a><button class="btn" id="save"><i data-lucide="save"></i>Publish changes</button></div></div>
 
 <div class="box"><h2>Order contact</h2><p class="mu">Orders are sent to this WhatsApp number. Use the full number; a leading 0 is treated as Nigeria (+234).</p>
-<div class="g"><div><label for="sn">Store name</label><input id="sn"></div><div><label for="sw">WhatsApp number</label><input id="sw" type="tel"></div><div><label for="se">Email</label><input id="se" type="email"></div></div></div>
+<div class="g"><div><label for="sn">Store name</label><input id="sn"></div><div><label for="sw">WhatsApp number</label><input id="sw" type="tel"></div><div><label for="se">Email</label><input id="se" type="email"></div>
+<div><label for="sl">Logo</label><input id="sl" type="file" accept="image/*"><div class="act" style="margin-top:8px;align-items:center"><div class="t" id="lp"></div><button class="btn o" id="lrm" hidden>Remove logo</button></div><p class="mu" id="lu"></p></div></div></div>
+
+<div class="box"><h2>Landing page hero</h2><p class="mu">Change the main heading, intro and picture. Lengths are limited so the layout stays tidy, and the picture is cropped to a square frame. Leave a field empty to use the original text. Removing the picture brings back the animated flame pan.</p>
+<div class="g"><div><label for="hl1">Heading, first line</label><input id="hl1" maxlength="22" placeholder="Cooking at"></div><div><label for="hl2">Heading, highlighted line</label><input id="hl2" maxlength="22" placeholder="Vee's kitchen"></div></div>
+<label for="htx">Intro text</label><textarea id="htx" rows="3" maxlength="180" placeholder="Smoky, spicy, made-to-order food for your table..."></textarea>
+<label for="hpi">Hero picture</label><input id="hpi" type="file" accept="image/*"><div class="act" style="margin-top:8px;align-items:center"><div class="t" id="hpv"></div><button class="btn o" id="hrm" hidden>Remove picture</button></div><p class="mu" id="hmsg"></p></div>
+
+<div class="box"><h2>Categories</h2><p class="mu">Create categories like Mains, Small chops or Drinks, then pick one when adding a product.</p><div class="act" style="margin-top:12px"><input id="nc" placeholder="New category name" style="flex:1;min-width:180px"><button class="btn" id="ac"><i data-lucide="plus"></i>Add category</button></div><div class="act" id="cl" style="margin-top:14px"></div></div>
 
 <div class="box"><h2 id="ft">Add product</h2>
 <div class="g"><div><label for="pn">Name</label><input id="pn"></div><div><label for="pp">Price (₦)</label><input id="pp" type="number" min="0"></div>
-<div><label for="pc">Category</label><input id="pc" list="cats" placeholder="Mains, Drinks..."><datalist id="cats"></datalist></div></div>
+<div><label for="pc">Category</label><select id="pc"></select></div></div>
 <label for="pd">Description</label><textarea id="pd" rows="2"></textarea>
 <div class="g"><div><label for="pi">Photo</label><input id="pi" type="file" accept="image/*"></div><div><label for="pa">Availability</label><select id="pa"><option value="1">In stock</option><option value="0">Sold out</option></select></div></div>
 <p class="mu" id="up" style="margin-top:8px"></p>
@@ -47,12 +56,12 @@ let pw=sessionStorage.getItem('tvpw')||'',P=[],S={},img='',editId=null,busy=fals
 const msg=t=>{const m=$('#msg');m.textContent=t;m.style.display='block';setTimeout(()=>m.style.display='none',2600)};
 const api=async b=>{const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json','x-admin-password':pw},body:JSON.stringify(b)});const j=await r.json();if(!r.ok)throw Error(j.error||'Request failed');return j};
 async function enter(){await api({action:'login'});sessionStorage.setItem('tvpw',pw);$('#login').hidden=true;$('#app').hidden=false;
- const d=await (await fetch('/api/data')).json();S={name:'Taste Veelicious',whatsapp:'07066506886',email:'Ijandipeimoleayo@gmail.com',...(d.settings||{})};P=d.products||[];
- $('#sn').value=S.name;$('#sw').value=S.whatsapp;$('#se').value=S.email;draw()}
+ const d=await (await fetch('/api/data')).json();S={name:'Taste Veelicious',whatsapp:'07066506886',email:'Ijandipeimoleayo@gmail.com',logo:'',categories:[],...(d.settings||{})};P=d.products||[];
+ $('#sn').value=S.name;$('#sw').value=S.whatsapp;$('#se').value=S.email;$('#hl1').value=S.heroTitle1||'';$('#hl2').value=S.heroTitle2||'';$('#htx').value=S.heroText||'';heroUI();logoUI();draw()}
 $('#go').onclick=async()=>{pw=$('#pw').value;try{await enter()}catch(e){$('#err').textContent=e.message}};
 $('#pw').onkeydown=e=>{if(e.key=='Enter')$('#go').click()};
 if(pw)enter().catch(()=>{pw=''});
-function draw(){$('#cats').innerHTML=[...new Set(P.map(p=>p.category))].map(c=>`<option value="${esc(c)}">`).join('');
+function draw(){const cs=[...new Set([...(S.categories||[]),...P.map(p=>p.category)].filter(Boolean))],v=$('#pc').value;$('#pc').innerHTML='<option value="">No category</option>'+cs.map(c=>`<option>${esc(c)}</option>`).join('');$('#pc').value=v;$('#cl').innerHTML=(S.categories||[]).length?S.categories.map((c,k)=>`<span class="chip">${esc(c)}<button data-rc="${k}" aria-label="Remove ${esc(c)}"><i data-lucide="x"></i></button></span>`).join(''):'<span class="mu">No categories yet.</span>';
  $('#list').innerHTML=P.length?P.map(p=>`<div class="p"><div class="t">${p.image?`<img src="${esc(p.image)}" alt="">`:'<i data-lucide="chef-hat"></i>'}</div><div><b>${esc(p.name)}</b><div class="mu">₦${Number(p.price).toLocaleString()} | ${esc(p.category||'No category')} | ${p.available===false?'Sold out':'In stock'}</div></div><div class="act"><button class="btn o" data-e="${p.id}" aria-label="Edit"><i data-lucide="pencil"></i></button><button class="btn d" data-x="${p.id}" aria-label="Delete"><i data-lucide="trash-2"></i></button></div></div>`).join(''):'<p class="mu">No products yet. Add your first one above.</p>';lucide.createIcons()}
 $('#pi').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#up').textContent='Uploading photo...';
  try{const bm=await createImageBitmap(f),k=Math.min(1,1000/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=bm.width*k;c.height=bm.height*k;c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
@@ -66,7 +75,20 @@ $('#list').onclick=e=>{const b=e.target.closest('button');if(!b)return;
  if(b.dataset.x){if(confirm('Delete this product?')){P=P.filter(p=>p.id!=b.dataset.x);draw()}}
  if(b.dataset.e){const p=P.find(x=>x.id==b.dataset.e);editId=p.id;img=p.image||'';$('#pn').value=p.name;$('#pp').value=p.price;$('#pc').value=p.category||'';$('#pd').value=p.description||'';$('#pa').value=p.available===false?'0':'1';
  $('#ft').textContent='Edit product';$('#add span').textContent='Update product';$('#cancel').hidden=false;scrollTo({top:0,behavior:'smooth'})}};
-$('#save').onclick=async()=>{if(busy)return;busy=true;S={name:$('#sn').value.trim(),whatsapp:$('#sw').value.trim(),email:$('#se').value.trim()};
+$('#save').onclick=async()=>{if(busy)return;busy=true;S={...S,name:$('#sn').value.trim(),whatsapp:$('#sw').value.trim(),email:$('#se').value.trim(),heroTitle1:$('#hl1').value.trim(),heroTitle2:$('#hl2').value.trim(),heroText:$('#htx').value.trim()};
  try{await api({action:'save',products:P,settings:S});msg('Published. Your store is updated.')}catch(e){msg(e.message)}busy=false};
+$('#sl').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#lu').textContent='Uploading logo...';
+ try{const bm=await createImageBitmap(f),k=Math.min(1,600/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=bm.width*k;c.height=bm.height*k;const x=c.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,c.width,c.height);x.drawImage(bm,0,0,c.width,c.height);
+ S.logo=(await api({action:'upload',data:c.toDataURL('image/jpeg',.9)})).url;logoUI();$('#lu').textContent='Logo ready. Press Publish changes.'}catch(g){$('#lu').textContent='Upload failed: '+g.message}};
+$('#lrm').onclick=()=>{S.logo='';$('#sl').value='';logoUI()};
+$('#hpi').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#hmsg').textContent='Uploading picture...';
+ try{const bm=await createImageBitmap(f),k=Math.min(1,1200/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=bm.width*k;c.height=bm.height*k;c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
+ S.heroImage=(await api({action:'upload',data:c.toDataURL('image/jpeg',.85)})).url;heroUI();$('#hmsg').textContent='Picture ready. Press Publish changes.'}catch(g){$('#hmsg').textContent='Upload failed: '+g.message}};
+$('#hrm').onclick=()=>{S.heroImage='';$('#hpi').value='';heroUI()};
+function heroUI(){$('#hpv').innerHTML=S.heroImage?`<img src="${esc(S.heroImage)}" alt="">`:'<i data-lucide="image"></i>';$('#hrm').hidden=!S.heroImage;lucide.createIcons()}
+function logoUI(){$('#lp').innerHTML=S.logo?`<img src="${esc(S.logo)}" alt="">`:'<i data-lucide="image"></i>';$('#lrm').hidden=!S.logo;lucide.createIcons()}
+$('#ac').onclick=()=>{const v=$('#nc').value.trim();if(!v)return;S.categories=S.categories||[];if(S.categories.some(c=>c.toLowerCase()==v.toLowerCase()))return msg('That category already exists');S.categories.push(v);$('#nc').value='';draw();msg('Category added. Press Publish changes to go live.')};
+$('#nc').onkeydown=e=>{if(e.key=='Enter')$('#ac').click()};
+$('#cl').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=S.categories[b.dataset.rc];if(P.some(p=>p.category==c)&&!confirm('Products use this category. Remove it and unassign them?'))return;P.forEach(p=>{if(p.category==c)p.category=''});S.categories.splice(b.dataset.rc,1);draw()};
 lucide.createIcons();
 </script></body></html>

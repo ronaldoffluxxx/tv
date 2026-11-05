@@ -4,7 +4,7 @@
 <title>Taste Veelicious | Cooking at Vee's</title>
 <meta name="description" content="Freshly cooked meals, small chops and drinks from Vee's kitchen. Order on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" id="fav" href="data:,"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 <style>
 :root{--bg:#050505;--card:#121110;--line:#2a2623;--tx:#f5efe8;--mu:#a39b93;--or:#f7941d;--am:#ffc02e;--r:18px}
@@ -17,7 +17,7 @@ i[data-lucide],svg.lucide{width:1.15em;height:1.15em;vertical-align:-.2em}
 .wrap{max-width:1180px;margin:auto;padding:0 20px}
 header{position:fixed;inset:0 0 auto;z-index:20;background:rgba(5,5,5,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
-.logo{font-weight:800;font-size:1.3rem;display:flex;gap:8px;align-items:center}.logo svg{color:var(--or)}
+.logo{font-weight:800;font-size:1.3rem;display:flex;gap:8px;align-items:center}.logo svg{color:var(--or)}.logo img{height:46px;width:auto;border-radius:8px;display:block}
 nav{display:flex;gap:26px;align-items:center}nav a{color:var(--mu)}nav a:hover{color:var(--tx)}
 .btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;border:0;cursor:pointer;border-radius:99px;padding:12px 22px;font-weight:600;background:linear-gradient(135deg,var(--or),var(--am));color:#1a0f00;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(247,148,29,.35)}
@@ -40,6 +40,9 @@ nav{display:flex;gap:26px;align-items:center}nav a{color:var(--mu)}nav a:hover{c
 .panbody{animation:toss 3.2s ease-in-out infinite;transform-origin:30% 70%}@keyframes toss{50%{transform:rotate(-4deg) translateY(-6px)}}
 .ember{position:absolute;bottom:50%;width:7px;height:7px;border-radius:50%;background:var(--am);box-shadow:0 0 12px var(--or);opacity:0;animation:rise 3s linear infinite}
 @keyframes rise{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),-190px)}}
+.himg{display:none;position:absolute;inset:0;border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:0 0 80px rgba(247,148,29,.25);animation:float 6s ease-in-out infinite}.himg img{width:100%;height:100%;object-fit:cover;display:block}@keyframes float{50%{transform:translateY(-10px)}}
+.pan.has .himg{display:block}.pan.has svg,.pan.has .ember{display:none}
+.hero h1{overflow-wrap:anywhere}.hero .wrap,#hLogo,#fLogo{opacity:0;transition:opacity .6s}.ready .hero .wrap,.ready #hLogo,.ready #fLogo{opacity:1}
 .strip{border-block:1px solid var(--line);overflow:hidden;background:#0b0a09}
 .strip div{display:flex;gap:48px;width:max-content;padding:16px 0;animation:mq 28s linear infinite;color:var(--mu);font-weight:500}
 .strip span{display:flex;gap:10px;align-items:center}.strip svg{color:var(--or)}@keyframes mq{to{transform:translateX(-50%)}}
@@ -71,22 +74,27 @@ footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mu)}footer .w
 .empty{text-align:center;color:var(--mu);padding:60px 10px}.empty svg{width:42px;height:42px;color:var(--or);margin-bottom:10px}
 label{display:block;font-size:.9rem;color:var(--mu);margin:12px 0 4px}
 input,textarea{width:100%;background:#151311;border:1px solid var(--line);border-radius:12px;padding:12px 14px}input:focus,textarea:focus{border-color:var(--or);outline:0}
+.done{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.85);display:grid;place-items:center;opacity:0;pointer-events:none;transition:.3s;padding:20px}.done.on{opacity:1;pointer-events:auto}
+.dbx{background:#0c0b0a;border:1px solid var(--line);border-radius:28px;padding:36px 28px;text-align:center;max-width:400px;transform:scale(.9);transition:.4s}.done.on .dbx{transform:none}
+.tick{width:104px;height:104px;margin-bottom:12px}.tick circle,.tick path{fill:none;stroke:#22c55e;stroke-linecap:round;stroke-linejoin:round}.tick circle{stroke-width:1.1;stroke-dasharray:70;stroke-dashoffset:70}.tick path{stroke-width:2.4;stroke-dasharray:30;stroke-dashoffset:30}
+.done.on .tick circle{animation:dr .7s .1s forwards}.done.on .tick path{animation:dr .45s .7s forwards}@keyframes dr{to{stroke-dashoffset:0}}
+.dbx h2{font-size:2rem;margin-bottom:6px}.dbx p{color:var(--mu);margin-bottom:22px}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);background:#fff;color:#000;padding:12px 20px;border-radius:99px;z-index:70;transition:.4s;display:flex;gap:8px;align-items:center;font-weight:600}.toast.on{transform:translate(-50%,0)}
 @media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.pan{max-width:300px;order:-1}.hero{padding-top:90px}nav a{display:none}section{padding:64px 0}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.tick circle,.tick path{stroke-dashoffset:0!important}*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style></head><body>
-<header><div class="wrap"><a href="#top" class="logo"><i data-lucide="flame"></i>Taste Veelicious</a>
+<header><div class="wrap"><a href="#top" class="logo" id="hLogo"><i data-lucide="flame"></i>Taste Veelicious</a>
 <nav><a href="#menu">Menu</a><a href="#how">How it works</a><a href="#contact">Contact</a>
 <button class="btn cartbtn" id="openCart" aria-label="Open cart"><i data-lucide="shopping-bag"></i><span class="badge" id="count">0</span></button></nav></div></header>
 
 <main id="top">
 <div class="hero"><div class="wrap">
-<div><h1>Cooking at<span>Vee's kitchen</span></h1>
-<p>Smoky, spicy, made-to-order food for your table, your party and your late nights. Pick what you want, send the order straight to us on WhatsApp.</p>
+<div><h1><b id="ht1" style="font:inherit">Cooking at</b><span id="ht2">Vee's kitchen</span></h1>
+<p id="hp">Smoky, spicy, made-to-order food for your table, your party and your late nights. Pick what you want, send the order straight to us on WhatsApp.</p>
 <div class="cta"><a href="#menu" class="btn"><i data-lucide="utensils"></i>Order now</a><a href="#how" class="btn ghost"><i data-lucide="route"></i>How it works</a></div></div>
-<div class="pan" aria-hidden="true">
+<div class="pan" id="pan" aria-hidden="true">
 <span class="ember" style="left:42%;--x:-30px"></span><span class="ember" style="left:52%;--x:20px;animation-delay:-1s"></span><span class="ember" style="left:60%;--x:40px;animation-delay:-2s"></span><span class="ember" style="left:36%;--x:-50px;animation-delay:-1.6s"></span>
-<svg viewBox="0 0 400 400"><defs><linearGradient id="f" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f7941d"/><stop offset="1" stop-color="#ffd24a"/></linearGradient></defs>
+<div class="himg"><img id="himgi" alt=""></div><svg viewBox="0 0 400 400"><defs><linearGradient id="f" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f7941d"/><stop offset="1" stop-color="#ffd24a"/></linearGradient></defs>
 <g class="panbody"><ellipse cx="170" cy="272" rx="125" ry="26" fill="#141210" stroke="#3a332d" stroke-width="3"/><path d="M45 272c10 50 70 70 125 70s110-20 125-70" fill="#0f0d0c" stroke="#3a332d" stroke-width="3"/><path d="M290 280c30-8 60-34 85-62 12-12 22-12 22-2s-12 20-24 32c-30 30-60 44-90 40z" fill="#0f0d0c" stroke="#3a332d" stroke-width="3"/>
 <g class="flame"><path d="M170 262c-70-10-90-70-50-120 6 20 16 28 24 30-6-40 10-76 40-108-2 40 22 56 34 84 4-14 2-26-4-40 30 30 50 90 6 140-12 8-32 12-50 14z" fill="url(#f)"/></g>
 <g class="flame b"><path d="M170 262c-36-6-48-40-24-70 6 12 12 14 18 14-2-22 6-40 20-54 0 20 12 30 18 44 18 28 8 56-32 66z" fill="#ffe08a" opacity=".85"/></g></g></svg></div>
@@ -107,7 +115,7 @@ input,textarea{width:100%;background:#151311;border:1px solid var(--line);border
 <a class="btn" id="waLink" href="#" target="_blank" rel="noopener"><i data-lucide="message-circle"></i>Chat on WhatsApp</a></div></div></section>
 </main>
 
-<footer><div class="wrap"><div class="logo"><i data-lucide="flame"></i>Taste Veelicious</div>
+<footer><div class="wrap"><div class="logo" id="fLogo"><i data-lucide="flame"></i>Taste Veelicious</div>
 <div><a id="telLink" href="#"><i data-lucide="phone"></i><span id="telTx"></span></a><a id="mailLink" href="#"><i data-lucide="mail"></i><span id="mailTx"></span></a></div></div></footer>
 
 <div class="ov" id="ov"></div>
@@ -123,16 +131,11 @@ input,textarea{width:100%;background:#151311;border:1px solid var(--line);border
 <label for="a">Delivery address</label><textarea id="a" rows="3" required autocomplete="street-address"></textarea>
 <label for="t">Notes (optional)</label><textarea id="t" rows="2" placeholder="Spice level, delivery time, landmark"></textarea></div>
 <div class="df"><div class="tot"><span>Total</span><span id="ctotal"></span></div><button class="btn" style="width:100%" type="submit"><i data-lucide="send"></i>Send order on WhatsApp</button></div></form></aside>
+<div class="done" id="done" role="dialog" aria-live="polite"><div class="dbx"><svg class="tick" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M20 6 9 17l-5-5" transform="translate(0 0) scale(.62) translate(7.3 8)"/></svg><h2>Order confirmed</h2><p>Opening WhatsApp now. Tap send there to place your order with us.</p><div class="row"><a class="btn" id="doneWa" href="#" target="_blank" rel="noopener"><i data-lucide="message-circle"></i>Open WhatsApp</a><button class="btn ghost" id="doneClose">Back to menu</button></div></div></div>
 <div class="toast" id="toast"><i data-lucide="circle-check"></i><span></span></div>
 
 <script>
-const D={settings:{name:'Taste Veelicious',whatsapp:'07066506886',email:'Ijandipeimoleayo@gmail.com'},products:[
-{id:'1',name:'Party Jollof Tray',price:25000,category:'Mains',description:'Smoky party jollof, serves 8 to 10.',available:true},
-{id:'2',name:'Asun Bowl',price:6500,category:'Mains',description:'Peppered goat meat, grilled then tossed in hot sauce.',available:true},
-{id:'3',name:'Chicken Peppersoup',price:5500,category:'Mains',description:'Fragrant, clear and properly hot.',available:true},
-{id:'4',name:'Small Chops Box',price:12000,category:'Small chops',description:'Samosa, spring rolls, puff puff and chicken wings.',available:true},
-{id:'5',name:'Chin Chin Jar',price:3500,category:'Small chops',description:'Crunchy, lightly sweet, made fresh.',available:true},
-{id:'6',name:'Zobo Drink 1L',price:2500,category:'Drinks',description:'Hibiscus with ginger and pineapple.',available:true}]};
+const D={settings:{name:'Taste Veelicious',whatsapp:'07066506886',email:'Ijandipeimoleayo@gmail.com',logo:'',categories:[]},products:[]};
 let S=D.settings,P=D.products,cart=JSON.parse(localStorage.getItem('tvcart')||'[]'),cat='All',buy=null;
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>'₦'+Number(n).toLocaleString('en-NG');
@@ -140,13 +143,13 @@ const wa=()=>{let d=String(S.whatsapp||'').replace(/\D/g,'');if(d.startsWith('0'
 const ic=()=>lucide.createIcons();
 const img=p=>p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">`:'<i data-lucide="chef-hat"></i>';
 function toast(m){const t=$('#toast');t.querySelector('span').textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
-function site(){const w=wa();$('#waLink').href='https://wa.me/'+w;$('#telLink').href='tel:+'+w;$('#telTx').textContent=S.whatsapp;$('#mailLink').href='mailto:'+S.email;$('#mailTx').textContent=S.email;
+function site(){$('#ht1').textContent=S.heroTitle1||'Cooking at';$('#ht2').textContent=S.heroTitle2||"Vee's kitchen";$('#hp').textContent=S.heroText||'Smoky, spicy, made-to-order food for your table, your party and your late nights. Pick what you want, send the order straight to us on WhatsApp.';$('#pan').classList.toggle('has',!!S.heroImage);if(S.heroImage)$('#himgi').src=S.heroImage;const lg=S.logo?`<img src="${esc(S.logo)}" alt="${esc(S.name||'Taste Veelicious')}">`:`<i data-lucide="flame"></i>${esc(S.name||'Taste Veelicious')}`;$('#hLogo').innerHTML=lg;$('#fLogo').innerHTML=lg;if(S.logo)$('#fav').href=S.logo;const w=wa();$('#waLink').href='https://wa.me/'+w;$('#telLink').href='tel:+'+w;$('#telTx').textContent=S.whatsapp;$('#mailLink').href='mailto:'+S.email;$('#mailTx').textContent=S.email;
  const m=['Made to order','Party trays','Small chops','Fresh drinks','Delivered to your door','Order on WhatsApp'].map(x=>`<span><i data-lucide="flame"></i>${x}</span>`).join('');$('#mq').innerHTML=m+m}
-function render(){const cats=['All',...new Set(P.map(p=>p.category).filter(Boolean))];
+function render(){const cs=[...(S.categories||[]),...P.map(p=>p.category)].filter(Boolean),cats=['All',...new Set(cs)].filter(c=>c=='All'||P.some(p=>p.category==c));$('#tabs').style.display=cats.length<3?'none':'';
  $('#tabs').innerHTML=cats.map(c=>`<button class="tab ${c==cat?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
  const L=P.filter(p=>cat=='All'||p.category==cat);
  $('#grid').innerHTML=L.length?L.map(p=>`<article class="card reveal ${p.available===false?'soldout':''}"><div class="img">${img(p)}</div><div class="cb"><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="pr">${money(p.price)}</div>
- <div class="row"><button class="btn ghost" data-add="${p.id}"><i data-lucide="plus"></i>Add</button><button class="btn" data-buy="${p.id}"><i data-lucide="zap"></i>Buy now</button></div></div></article>`).join(''):'<p class="sub">Nothing here yet.</p>';
+ <div class="row"><button class="btn ghost" data-add="${p.id}"><i data-lucide="plus"></i>Add</button><button class="btn" data-buy="${p.id}"><i data-lucide="zap"></i>Buy now</button></div></div></article>`).join(''):'<p class="sub">Our menu is being updated. Message us on WhatsApp to order.</p>';
  ic();io()}
 function io(){const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll('.reveal:not(.in)').forEach(e=>o.observe(e))}
 const save=()=>localStorage.setItem('tvcart',JSON.stringify(cart));
@@ -167,10 +170,10 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,a');if(!t
  else if(t.id=='openCart'){buy=null;open('cart')}else if(t.id=='toCheckout'){buy=null;checkout()}
  else if(t.hasAttribute('data-close'))closeAll()});
 $('#ov').onclick=closeAll;document.onkeydown=e=>{if(e.key=='Escape')closeAll()};
-$('#form').onsubmit=e=>{e.preventDefault();const L=lines(),t=L.reduce((a,r)=>a+r.p.price*r.q,0),id='TV-'+Date.now().toString(36).toUpperCase().slice(-6);
+let tm;$('#form').onsubmit=e=>{e.preventDefault();const L=lines(),t=L.reduce((a,r)=>a+r.p.price*r.q,0),id='TV-'+Date.now().toString(36).toUpperCase().slice(-6);
  const m=[`*New order ${id} - ${S.name||'Taste Veelicious'}*`,'',`Name: ${$('#n').value}`,`Phone: ${$('#p').value}`,!!$('#e').value&&`Email: ${$('#e').value}`,`Delivery address: ${$('#a').value}`,!!$('#t').value&&`Notes: ${$('#t').value}`,'','*Items*',...L.map((r,i)=>`${i+1}. ${r.p.name} x${r.q} - ${money(r.p.price*r.q)}`),'',`*Total: ${money(t)}* (delivery fee to be confirmed)`].filter(x=>x!==false).join('\n');
- const u='https://wa.me/'+wa()+'?text='+encodeURIComponent(m);if(!buy){cart=[];save();drawCart()}buy=null;e.target.reset();closeAll();toast('Opening WhatsApp to send your order');
- if(!window.open(u,'_blank'))location.href=u};
-fetch('/api/data').then(r=>r.json()).then(d=>{if(d.settings)S={...S,...d.settings};if(d.products)P=d.products}).catch(()=>{}).finally(()=>{site();render();drawCart()});
-site();render();drawCart();
+ const u='https://wa.me/'+wa()+'?text='+encodeURIComponent(m);if(!buy){cart=[];save();drawCart()}buy=null;e.target.reset();closeAll();$('#doneWa').href=u;$('#done').classList.add('on');clearTimeout(tm);tm=setTimeout(()=>{location.href=u},2800)};
+$('#doneWa').onclick=()=>clearTimeout(tm);$('#doneClose').onclick=()=>{clearTimeout(tm);$('#done').classList.remove('on')};
+const boot=()=>{site();render();drawCart();document.body.classList.add('ready')};
+fetch('/api/data').then(r=>r.json()).then(d=>{if(d.settings)S={...S,...d.settings};if(d.products)P=d.products}).catch(()=>{}).finally(boot);setTimeout(boot,2500);
 </script></body></html>
